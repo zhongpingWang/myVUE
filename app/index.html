@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue.js</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+  {{ message }}
+   <input v-model="message">	
+   <button v-on:click="reverseMessage">Reverse Message</button>
+  <p v-if="greeting">Hello!</p>
+    <li v-for="todo in todos">
+      {{ todo.text }}
+    </li>
+</div>
+
+
+<div id="todo">
+  <input v-model="newTodo" v-on:keyup.enter="addTodo">
+  <ul>
+    <li v-for="todo in todos">
+      <span>{{ todo.text }}</span>
+      <button v-on:click="removeTodo($index)">X</button>
+    </li>
+  </ul>
+</div>
+ 
+
+<script type="text/javascript" src="./js/index.js"></script>
+</body>
+</html>

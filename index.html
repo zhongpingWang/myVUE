@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>高度自适应布局</title>
+<style>
+body{ padding:0; margin:0; color:#f00;}
+.container{ margin:0 auto; width:600px; border:3px solid #00C;
+    overflow:hidden; /*这个超出隐藏的声明在IE6里不写也是可以的*/
+}
+.left{ float:left; width:150px; background:#B0B0B0;
+    padding-bottom:2000px;
+    margin-bottom:-2000px; 
+}
+.right{ float:left; width:450px; background:#6CC;
+   padding-bottom:2000px;
+   margin-bottom:-2000px; 
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="left">我是left</div>
+    <div class="right">我是right<br><br><br>现在我的高度比left高，但left用它的padding-bottom补偿了这部分高度</div>
+    <div style="clear:both"></div>
+</div>
+
+
+<style type="text/css">
+	.container2 {
+		width: 960px;
+		margin: 0 auto;
+	}
+	.rightWrap {
+		width: 100%;
+		float: left;
+		background: green;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.contentWrap {
+		float: left;
+		background: orange;
+		width: 100%;
+		position: relative;
+		right: 320px;/*此值等于rightSidebar的宽度*/
+	}
+	
+	.leftWrap{
+		width: 100%;
+		background: lime;
+		float:left;
+		position: relative;
+		right: 420px;/*此值等于Content的宽度*/
+	}
+	#left {
+		float: left;
+		width: 220px;
+		overflow: hidden;
+		position: relative;
+		left: 740px;
+	}
+	#content {
+		float: left;
+		width: 420px;
+		overflow: hidden;
+		position:relative;
+		left: 740px;
+	}
+	#right {
+		float: left;
+		overflow: hidden;
+		width: 320px;
+		background: #333;
+		position: relative;
+		left: 740px;
+	}
+</style>
+
+<div class="container2">
+	<div class="rightWrap">
+		<div class="contentWrap">
+			<div class="leftWrap">
+				<div class="aside column leftSidebar" id="left">ddd<br/><br/><br/><br/><br/></div>
+				<div id="content" class="column section"></div>
+				<div class="aside rightSidebat column" id="right"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<style type="text/css">
+	 
+#container{
+	background-color:#0ff;
+	float:left;
+	width:100%;	
+	border-left:220px solid #0f0;
+	border-right:220px solid #f00;
+	margin-left:-220px;
+	margin-right:-220px;
+	display:inline; /* So IE plays nice */
+}
+#left{
+	float:left;
+	width:220px;
+	margin-left:-220px;
+	position:relative;
+}
+#content{
+	float:left;
+	width:100%;
+	margin-right:-100%;
+}
+#right{
+	float:right;
+	width:220px;
+	margin-right:-220px;
+	position:relative;
+}
+</style>
+ <div id="container">
+	<div id="content">Main Content</div>
+	<div id="left">Left Sidebar</div>
+	<div id="right">Right Sidebar</div>
+</div>
+
+</body>
+</html>
