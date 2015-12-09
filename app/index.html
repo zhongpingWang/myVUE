@@ -1,35 +1,117 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>vue.js</title>
-	<meta charset="utf-8" />
-	<script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
-
+    <title>vue.js</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+    <style type="text/css" media="screen">
+    /* 必需 */
+    
+    .expand-transition {
+        transition: all .3s ease;
+        height: 30px;
+        padding: 10px;
+        background-color: #eee;
+        overflow: hidden;
+    }
+    /* .expand-enter 定义进入的开始状态 */
+    /* .expand-leave 定义离开的结束状态 */
+    
+    .expand-enter,
+    .expand-leave {
+        height: 0;
+        padding: 0 10px;
+        opacity: 0;
+    }
+    
+    .bounce-enter {
+        animation: bounce-in .5s;
+    }
+    
+    .bounce-leave {
+        animation: bounce-out .5s;
+    }
+    
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes bounce-out {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+    
+    ul {
+        padding-left: 0;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    
+    .staggered-transition {
+        transition: all .5s ease;
+        overflow: hidden;
+        margin: 0;
+        height: 20px;
+    }
+    
+    .staggered-enter,
+    .staggered-leave {
+        opacity: 0;
+        height: 0;
+    }
+    </style>
 </head>
+
 <body>
+    <div id="app">
+        {{ message }}
+        <input v-model="message">
+        <button v-on:click="reverseMessage">Reverse Message</button>
+        <p v-if="greeting" transition="expand">Hello!</p>
+        <span v-show="show" transition="bounce">Look at me!</span>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </div>
+    <div id="todo">
+        <input v-model="newTodo" v-on:keyup.enter="addTodo">
+        <ul>
+            <li v-for="todo in todos">
+                <span>{{ todo.text }}</span>
+                <button v-on:click="removeTodo($index)">X</button>
+            </li>
+        </ul>
+    </div>
+    <div id="demo">
+        <input v-model="query">
+        <ul>
+            <li v-for="item in list | filterBy query" transition="staggered" stagger="100">
+                {{item.msg}}
+            </li>
+        </ul>
+    </div>
 
-<div id="app">
-  {{ message }}
-   <input v-model="message">	
-   <button v-on:click="reverseMessage">Reverse Message</button>
-  <p v-if="greeting">Hello!</p>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
-</div>
+    <div id="example2">
+        <my-component  msg="hello!"></my-component>
+    </div>
 
 
-<div id="todo">
-  <input v-model="newTodo" v-on:keyup.enter="addTodo">
-  <ul>
-    <li v-for="todo in todos">
-      <span>{{ todo.text }}</span>
-      <button v-on:click="removeTodo($index)">X</button>
-    </li>
-  </ul>
-</div>
- 
-
-<script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
 </body>
+
 </html>
